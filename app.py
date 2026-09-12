@@ -457,7 +457,7 @@ HTML_TEMPLATE = r"""
         <!-- Right Panel: Dynamic Graphs & Explanations -->
         <div class="panel">
             <div style="display: flex; justify-content: space-between; align-items: center;">
-                <span style="font-weight: 600; color: #f4f4f5; font-size: 0.95rem;">System</span>
+                <span style="font-weight: 600; color: #f4f4f5; font-size: 0.95rem;">Graphs</span>
                 <div style="display: flex; gap: 4px;">
                     <button class="btn-sm" onclick="setChartWindow(3)">3s</button>
                     <button class="btn-sm" onclick="setChartWindow(6)">6s</button>
