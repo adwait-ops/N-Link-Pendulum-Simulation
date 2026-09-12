@@ -1,8 +1,8 @@
-\# N-Link Pendulum Simulation
+# N-Link Pendulum Simulation
 
 
 
-An interactive numerical simulation of a coupled \*\*N-link pendulum\*\*, developed to study nonlinear dynamics, coupled oscillations, energy transfer, and the numerical solution of the equations of motion.
+An interactive numerical simulation of a coupled **N-link pendulum**, developed to study nonlinear dynamics, coupled oscillations, energy transfer, and the numerical solution of the equations of motion.
 
 
 
@@ -10,11 +10,11 @@ The simulation derives and solves the coupled equations of motion for an arbitra
 
 
 
-\---
 
 
 
-\## Overview
+
+## Overview
 
 
 
@@ -22,7 +22,7 @@ A multi-link pendulum is a nonlinear dynamical system in which the motion of eac
 
 
 
-This project implements an \*\*N-link pendulum solver\*\* using the Lagrangian formulation of mechanics and numerically integrates the resulting equations of motion using `SciPy`.
+This project implements an **N-link pendulum solver** using the Lagrangian formulation of mechanics and numerically integrates the resulting equations of motion using `SciPy`.
 
 
 
@@ -30,35 +30,31 @@ The simulation provides:
 
 
 
-\* Real-time visualization of the pendulum
+* Real-time visualization of the pendulum
 
-\* Adjustable number of links
+* Adjustable number of links
 
-\* Adjustable gravitational acceleration
+* Adjustable gravitational acceleration
 
-\* Adjustable damping
+* Adjustable damping
 
-\* Multiple initial configurations
+* Multiple initial configurations
 
-\* Angle-versus-time plots
+* Angle-versus-time plots
 
-\* Kinetic, potential, and total energy plots
+* Kinetic, potential, and total energy plots
 
-\* Animation controls and zooming
+* Animation controls and zooming
 
-\* A built-in mathematical explanation of the model
+* A built-in mathematical explanation of the model
 
+<br>
 
-
-\---
-
-
-
-\## Physics
+## Physics
 
 
 
-\### Generalized Coordinates
+### Generalized Coordinates
 
 
 
@@ -66,11 +62,9 @@ For an N-link pendulum, the angular displacement of each link is represented by
 
 
 
-\[
-
-\\theta\_1,\\theta\_2,\\ldots,\\theta\_N
-
-]
+$$
+\theta_1,\theta_2,\ldots,\theta_N
+$$
 
 
 
@@ -82,19 +76,15 @@ The position of the end of link (i) is obtained from the cumulative contribution
 
 
 
-\[
-
+$$
 x\_i = \\sum\_{k=1}^{i} L\_k\\sin\\theta\_k
-
-]
-
+$$
 
 
-\[
 
+$$
 y\_i = -\\sum\_{k=1}^{i} L\_k\\cos\\theta\_k
-
-]
+$$
 
 
 
@@ -102,17 +92,16 @@ where:
 
 
 
-\* (L\_k) = length of link (k)
+* $$(L\_k)$$ = length of link (k)
 
-\* (\\theta\_k) = angular displacement of link (k)
-
-
-
-\---
+* $$(\\theta\_k)$$ = angular displacement of link (k)
 
 
 
-\## Lagrangian Formulation
+
+<br>
+
+## Lagrangian Formulation
 
 
 
@@ -120,11 +109,9 @@ The equations of motion are obtained using the Lagrangian
 
 
 
-\[
-
+$$
 \\mathcal{L}=T-V
-
-]
+$$
 
 
 
@@ -132,9 +119,9 @@ where:
 
 
 
-\* (T) = total kinetic energy
+* (T) = total kinetic energy
 
-\* (V) = total gravitational potential energy
+* (V) = total gravitational potential energy
 
 
 
@@ -142,13 +129,8 @@ For the system,
 
 
 
-\[
 
-T=\\frac{1}{2}\\sum\_{i=1}^{N}m\_i
-
-\\left(\\dot{x}\_i^2+\\dot{y}\_i^2\\right)
-
-]
+$$T=\\frac{1}{2}\\sum\_{i=1}^{N}m\_i\\left(\\dot{x}\_i^2+\\dot{y}\_i^2\\right)$$
 
 
 
@@ -156,11 +138,9 @@ and
 
 
 
-\[
-
+$$
 V=\\sum\_{i=1}^{N}m\_i g y\_i
-
-]
+$$
 
 
 
@@ -168,11 +148,11 @@ The Euler-Lagrange equations are then used to obtain the coupled equations gover
 
 
 
-\---
+
+<br>
 
 
-
-\## Matrix Form of the Equations of Motion
+## Matrix Form of the Equations of Motion
 
 
 
@@ -180,11 +160,9 @@ The resulting equations are expressed in the form
 
 
 
-\[
-
+$$
 M(\\theta)\\ddot{\\theta}=b(\\theta,\\dot{\\theta})
-
-]
+$$
 
 
 
@@ -192,13 +170,13 @@ where:
 
 
 
-\* (M(\\theta)) is the configuration-dependent mass matrix
+* $$(M(\\theta))$$ is the configuration-dependent mass matrix
 
-\* (\\theta) is the vector of angular positions
+* $$(\\theta)$$ is the vector of angular positions
 
-\* (\\dot{\\theta}) is the vector of angular velocities
+* $$(\\dot{\\theta})$$ is the vector of angular velocities
 
-\* (b) contains the nonlinear, gravitational, and damping terms
+* $$(b)$$ contains the nonlinear, gravitational, and damping terms
 
 
 
@@ -206,17 +184,9 @@ For the implementation, the elements of the mass matrix are
 
 
 
-\\left(
+$$M\_{jk} = \\left(\\sum\_{i=\\max(j,k)}^{N}m\_i\\right)L\_jL\_k\\cos(\\theta\_j-\\theta\_k)$$
 
-\\sum\_{i=\\max(j,k)}^{N}m\_i
 
-\\right)
-
-L\_jL\_k
-
-\\cos(\\theta\_j-\\theta\_k)
-
-]
 
 
 
@@ -224,45 +194,15 @@ The right-hand side contains the nonlinear coupling terms, gravitational terms, 
 
 
 
-\[
-
-b\_j =
-
-\-\\sum\_k
-
-\\left(
-
-\\sum\_{i=\\max(j,k)}^{N}m\_i
-
-\\right)
-
-L\_jL\_k
-
-\\sin(\\theta\_j-\\theta\_k)\\dot{\\theta}\_k^2
-
-]
+$$b\_j = \-\\sum\_k\\left(\\sum\_{i=\\max(j,k)}^{N}m\_i\\right)L\_jL\_k\\sin(\\theta\_j-\\theta\_k)\\dot{\\theta}\_k^2\-\\left(\\sum\_{i=j}^{N}m\_i\\right)gL\_j\\sin\\theta\_j\-\\gamma\\dot{\\theta}\_j$$
 
 
-
-\[
-
-\-\\left(\\sum\_{i=j}^{N}m\_i\\right)gL\_j\\sin\\theta\_j
-
-\-\\gamma\\dot{\\theta}\_j
-
-]
-
-
-
+​
 The angular accelerations are obtained by solving
 
 
 
-\[
-
-\\ddot{\\theta}=M^{-1}b
-
-]
+$\\ddot{\\theta}=M^{-1}b$
 
 
 
@@ -282,11 +222,10 @@ This gives the numerical angular accelerations required by the ODE solver.
 
 
 
-\---
 
+<br>
 
-
-\## Numerical Method
+## Numerical Method
 
 
 
@@ -298,19 +237,17 @@ The state vector is
 
 
 
-\[
-
+$$
 y =
-
-\[
-
-\\theta\_1,\\ldots,\\theta\_N,
-
-\\dot{\\theta}\_1,\\ldots,\\dot{\\theta}\_N
-
-]
-
-]
+\begin{bmatrix}
+\theta_1 \\
+\vdots \\
+\theta_N \\
+\dot{\theta}_1 \\
+\vdots \\
+\dot{\theta}_N
+\end{bmatrix}
+$$
 
 
 
@@ -318,19 +255,17 @@ The derivative of this state is
 
 
 
-\[
-
-\\dot{y} =
-
-\[
-
-\\dot{\\theta}\_1,\\ldots,\\dot{\\theta}\_N,
-
-\\ddot{\\theta}\_1,\\ldots,\\ddot{\\theta}\_N
-
-]
-
-]
+$$
+\dot{y} =
+\begin{bmatrix}
+\dot{\theta}_1 \\
+\vdots \\
+\dot{\theta}_N \\
+\ddot{\theta}_1 \\
+\vdots \\
+\ddot{\theta}_N
+\end{bmatrix}
+$$
 
 
 
@@ -338,22 +273,16 @@ The system is numerically integrated using the `solve\_ivp` function from SciPy.
 
 
 
-The current implementation uses the \*\*RK45\*\* method:
+The current implementation uses the **RK45** method:
 
 
 
 ```python
-
-solve\_ivp(
-
-&#x20;   ...,
-
-&#x20;   method="RK45",
-
-&#x20;   rtol=1e-3,
-
-&#x20;   atol=1e-3
-
+solve_ivp(
+    ...,
+    method="RK45",
+    rtol=1e-3,
+    atol=1e-3
 )
 
 ```
@@ -364,11 +293,10 @@ RK45 is an adaptive Runge-Kutta method that adjusts its integration step accordi
 
 
 
-\---
 
+<br>
 
-
-\## Damping
+## Damping
 
 
 
@@ -376,15 +304,11 @@ A linear damping term is included in the equations of motion:
 
 
 
-\[
-
-\-\\gamma\\dot{\\theta}\_j
-
-]
+$$\-\\gamma\\dot{\\theta}\_j$$
 
 
 
-where (\\gamma) is the damping coefficient.
+where $$(\gamma)$$ is the damping coefficient.
 
 
 
@@ -396,11 +320,10 @@ With damping enabled, mechanical energy is dissipated over time.
 
 
 
-\---
+<br>
 
 
-
-\## Energy Analysis
+## Energy Analysis
 
 
 
@@ -408,53 +331,27 @@ The simulation calculates the three main energy quantities:
 
 
 
-\### Kinetic Energy
+* ### Kinetic Energy
 
 
 
-\[
-
-T=
-
-\\frac{1}{2}
-
-\\sum\_{i=1}^{N}
-
-m\_i
-
-\\left(
-
-\\dot{x}\_i^2+\\dot{y}\_i^2
-
-\\right)
-
-]
+$$T=\\frac{1}{2}\\sum\_{i=1}^{N}m\_i\\left(\\dot{x}\_i^2+\\dot{y}\_i^2\\right)$$
 
 
 
-\### Potential Energy
+* ### Potential Energy
 
 
 
-\[
-
-V=
-
-\\sum\_{i=1}^{N}m\_i g y\_i
-
-]
+$$V=\\sum\_{i=1}^{N}m\_i g y\_i$$
 
 
 
-\### Total Mechanical Energy
+* ### Total Mechanical Energy
 
 
 
-\[
-
-E=T+V
-
-]
+$$E=T+V$$
 
 
 
@@ -462,129 +359,70 @@ These quantities are plotted during the simulation to provide a direct way of ex
 
 
 
-\---
+<br>
 
 
 
-\## Initial Conditions
+## Initial Conditions
 
+The simulation supports three predefined initial configurations:
 
+### Horizontal
 
-The simulation provides multiple initial configurations.
+- All links start in a horizontal configuration.
+- Useful for observing the development of coupled motion from a symmetric state.
 
+### Inverted
 
+- All links start in an inverted configuration.
+- Demonstrates the instability of the inverted equilibrium.
 
-\### Horizontal
+### Random
 
+- Link angles are initialized randomly.
+- Allows different nonlinear trajectories to be explored.
+- Useful for studying sensitivity to initial conditions.
 
+<br>
 
-The pendulum links are initially placed in a horizontal configuration.
 
+## Features
 
+### Simulation
 
-\### Inverted
+- **N-link dynamics:** simulate a configurable number of coupled pendulum links.
+- **Multiple initial conditions:** horizontal, inverted, and random configurations.
+- **Adjustable parameters:** modify gravity and damping to study their effects.
+- **Real-time animation:** visualize the complete pendulum motion directly in the browser.
 
+### Analysis
 
+- **Angular displacement:** track $\theta_i(t)$ for every link.
+- **Energy analysis:** monitor kinetic, potential, and total mechanical energy.
+- **Trajectory trails:** visualize the path followed by the pendulum.
+- **Interactive plots:** inspect the dynamics over different time windows.
 
-The links are initially placed in an inverted configuration.
+### Interface
 
+- Play / pause
+- Reset
+- Animation speed control
+- Zoom and pan
+- Fullscreen plots
 
 
-\### Random
 
 
 
-The angular coordinates are initialized with a random configuration, allowing different nonlinear trajectories to be explored.
+<br>
 
 
 
-\---
+## Web Interface
 
 
 
-\## Features
-
-
-
-\### Interactive Pendulum Visualization
-
-
-
-The simulation renders the motion of the entire N-link system on a browser canvas.
-
-
-
-\### Variable Number of Links
-
-
-
-The number of pendulum links can be changed to study how increasing system complexity affects the dynamics.
-
-
-
-\### Adjustable Gravity
-
-
-
-The gravitational acceleration can be modified to investigate its influence on the system.
-
-
-
-\### Damping Control
-
-
-
-The damping coefficient can be changed to compare dissipative and approximately conservative motion.
-
-
-
-\### Angle Plots
-
-
-
-The angular displacement of each link can be plotted as a function of time.
-
-
-
-\### Energy Plots
-
-
-
-Kinetic, potential, and total mechanical energy can be visualized simultaneously.
-
-
-
-\### Animation Controls
-
-
-
-The interface includes:
-
-
-
-\* Play/pause
-
-\* Reset
-
-\* Animation speed control
-
-\* Zoom and pan
-
-\* Trail visualization
-
-\* Fullscreen charts
-
-
-
-\---
-
-
-
-\## Web Interface
-
-
-
-The project uses \*\*Flask\*\* to provide a lightweight web interface.
+The project uses **Flask** to provide a lightweight web interface.
 
 
 
@@ -600,15 +438,15 @@ A typical simulation request contains parameters such as:
 
 {
 
-&#x20;   "N": 12,
+   "N": 12,
 
-&#x20;   "g": 9.81,
+   "g": 9.81,
 
-&#x20;   "damping": 0.005,
+   "damping": 0.005,
 
-&#x20;   "preset": "horizontal",
+   "preset": "horizontal",
 
-&#x20;   "duration": 15
+   "duration": 15
 
 }
 
@@ -624,11 +462,11 @@ The frontend then uses the returned data to animate the pendulum and generate th
 
 
 
-\---
+
+<br>
 
 
-
-\## Project Structure
+## Project Structure
 
 
 
@@ -650,11 +488,11 @@ N-Link-Pendulum-Simulation/
 
 └── screenshots/
 
-&#x20;   ├── simulation.png
+   ├── simulation.png
 
-&#x20;   ├── angles.png
+   ├── angles.png
 
-&#x20;   └── energy.png
+   └── energy.png
 
 ```
 
@@ -663,16 +501,16 @@ N-Link-Pendulum-Simulation/
 > The screenshot files are optional and can be added after the project is running.
 
 
-
-\---
-
-
-
-\## Installation
+<br>
 
 
 
-\### 1. Clone the repository
+
+## Installation
+
+
+
+### 1. Clone the repository
 
 
 
@@ -686,7 +524,7 @@ cd N-Link-Pendulum-Simulation
 
 
 
-\### 2. Create a virtual environment
+### 2. Create a virtual environment
 
 
 
@@ -714,7 +552,7 @@ Activate it on Windows:
 
 
 
-\### 3. Install dependencies
+### 3. Install dependencies
 
 
 
@@ -726,11 +564,11 @@ pip install -r requirements.txt
 
 
 
-\---
+
+<br>
 
 
-
-\## Running the Simulation
+## Running the Simulation
 
 
 
@@ -762,11 +600,11 @@ Open this address in a web browser to access the simulation.
 
 
 
-\---
 
 
+<br>
 
-\## Requirements
+## Requirements
 
 
 
@@ -774,17 +612,17 @@ The project uses:
 
 
 
-\* \*\*Python\*\*
+* **Python**
 
-\* \*\*NumPy\*\* — numerical array and matrix operations
+* **NumPy:** numerical array and matrix operations
 
-\* \*\*SciPy\*\* — numerical integration of the equations of motion
+* **SciPy:** numerical integration of the equations of motion
 
-\* \*\*Flask\*\* — backend web application
+* **Flask:** backend web application
 
-\* \*\*Chart.js\*\* — interactive plotting
+* **Chart.js:** interactive plotting
 
-\* \*\*MathJax\*\* — rendering mathematical equations in the interface
+* **MathJax:** rendering mathematical equations in the interface
 
 
 
@@ -792,11 +630,11 @@ Python dependencies are listed in `requirements.txt`.
 
 
 
-\---
+
+<br>
 
 
-
-\## Computational Workflow
+## Computational Workflow
 
 
 
@@ -808,59 +646,59 @@ The overall simulation pipeline is:
 
 User Parameters
 
-&#x20;     │
+     │
 
-&#x20;     ▼
+     ▼
 
 Initial Conditions
 
-&#x20;     │
+     │
 
-&#x20;     ▼
+     ▼
 
 N-Link Equations of Motion
 
-&#x20;     │
+     │
 
-&#x20;     ▼
+     ▼
 
 Mass Matrix M(θ)
 
-&#x20;     │
+     │
 
-&#x20;     ▼
+     ▼
 
 Solve Mα = b
 
-&#x20;     │
+     │
 
-&#x20;     ▼
+     ▼
 
 Angular Accelerations
 
-&#x20;     │
+     │
 
-&#x20;     ▼
+     ▼
 
 RK45 Numerical Integration
 
-&#x20;     │
+     │
 
-&#x20;     ▼
+     ▼
 
 θ(t), θ̇(t)
 
-&#x20;     │
+     │
 
-&#x20;     ├───────────────┐
+     ├───────────────┐
 
-&#x20;     ▼               ▼
+     ▼               ▼
 
 Link Positions     Energy
 
-&#x20;     │               │
+     │               │
 
-&#x20;     ▼               ▼
+     ▼               ▼
 
 Animation         Graphs
 
@@ -868,11 +706,11 @@ Animation         Graphs
 
 
 
-\---
 
 
+<br>
 
-\## Results and Observations
+## Results and Observations
 
 
 
@@ -880,7 +718,7 @@ The simulation can be used to investigate several characteristics of coupled non
 
 
 
-\### Coupled Motion
+### Coupled Motion
 
 
 
@@ -888,7 +726,7 @@ The motion of one pendulum link affects the motion of the other links through th
 
 
 
-\### Increasing System Complexity
+### Increasing System Complexity
 
 
 
@@ -896,7 +734,7 @@ Increasing (N) introduces additional degrees of freedom and stronger opportuniti
 
 
 
-\### Energy Behavior
+### Energy Behavior
 
 
 
@@ -908,7 +746,7 @@ For nonzero damping, the total mechanical energy decreases as energy is dissipat
 
 
 
-\### Sensitivity to Initial Conditions
+### Sensitivity to Initial Conditions
 
 
 
@@ -916,11 +754,11 @@ The system can exhibit strongly different trajectories for different initial con
 
 
 
-\---
+<br>
 
 
 
-\## Screenshots
+## Screenshots
 
 
 
@@ -928,23 +766,23 @@ Add screenshots of the running simulation here.
 
 
 
-\### Simulation
+### Simulation
 
 
 
-\### Angular Displacement
+### Angular Displacement
 
 
 
-\### Energy
+### Energy
+
+<br>
 
 
 
-\---
 
 
-
-\## Limitations
+## Limitations
 
 
 
@@ -952,25 +790,25 @@ The current model makes several simplifying assumptions:
 
 
 
-\* Pendulum links are treated using prescribed point masses at their ends.
+* Pendulum links are treated using prescribed point masses at their ends.
 
-\* Link lengths and masses are configurable but the current frontend uses default values.
+* Link lengths and masses are configurable but the current frontend uses default values.
 
-\* Air resistance and other complex fluid effects are not modeled.
+* Air resistance and other complex fluid effects are not modeled.
 
-\* The damping model is simplified as a linear angular damping term.
+* The damping model is simplified as a linear angular damping term.
 
-\* Numerical accuracy depends on the integration tolerances and system configuration.
+* Numerical accuracy depends on the integration tolerances and system configuration.
 
-\* Very large values of (N) increase the computational cost of repeatedly solving the mass-matrix system.
-
-
-
-\---
+* Very large values of (N) increase the computational cost of repeatedly solving the mass-matrix system.
 
 
 
-\## Future Improvements
+
+<br>
+
+
+## Future Improvements
 
 
 
@@ -978,39 +816,39 @@ Possible extensions include:
 
 
 
-\* \[ ] Separate frontend HTML, CSS, and JavaScript from the Flask backend
+* [ ] Separate frontend HTML, CSS, and JavaScript from the Flask backend
 
-\* \[ ] Add independent mass and length controls for every link
+* [ ] Add independent mass and length controls for every link
 
-\* \[ ] Implement additional numerical integration methods
+* [ ] Implement additional numerical integration methods
 
-\* \[ ] Compare RK45 with symplectic integrators for long-term energy behavior
+* [ ] Compare RK45 with symplectic integrators for long-term energy behavior
 
-\* \[ ] Add phase-space plots
+* [ ] Add phase-space plots
 
-\* \[ ] Add Poincaré sections
+* [ ] Add Poincaré sections
 
-\* \[ ] Quantify sensitivity to initial conditions
+* [ ] Quantify sensitivity to initial conditions
 
-\* \[ ] Estimate Lyapunov exponents
+* [ ] Estimate Lyapunov exponents
 
-\* \[ ] Add parameter-sweep functionality
+* [ ] Add parameter-sweep functionality
 
-\* \[ ] Improve performance for large (N)
+* [ ] Improve performance for large $(N)$
 
-\* \[ ] Add 3D visualization
+* [ ] Add 3D visualization
 
-\* \[ ] Export simulation data as CSV
+* [ ] Export simulation data as CSV
 
-\* \[ ] Compare numerical results with analytical solutions for small-angle motion
-
-
-
-\---
+* [ ] Compare numerical results with analytical solutions for small-angle motion
 
 
 
-\## Why This Project?
+
+<br>
+
+
+## Why This Project?
 
 
 
@@ -1018,23 +856,23 @@ The N-link pendulum provides a compact example of several important concepts in 
 
 
 
-\* Classical mechanics
+* Classical mechanics
 
-\* Lagrangian mechanics
+* Lagrangian mechanics
 
-\* Nonlinear dynamics
+* Nonlinear dynamics
 
-\* Coupled differential equations
+* Coupled differential equations
 
-\* Numerical integration
+* Numerical integration
 
-\* Matrix methods
+* Matrix methods
 
-\* Energy conservation
+* Energy conservation
 
-\* Computational visualization
+* Computational visualization
 
-\* Scientific programming
+* Scientific programming
 
 
 
@@ -1042,11 +880,11 @@ The project therefore serves as both a physical model and a computational framew
 
 
 
-\---
 
 
+<br>
 
-\## References
+## References
 
 
 
@@ -1058,21 +896,21 @@ Suggested references:
 
 
 
-1\. H. Goldstein, C. Poole, and J. Safko, \*Classical Mechanics\*.
+1\. H. Goldstein, C. Poole, and J. Safko, *Classical Mechanics*.
 
-2\. L. D. Landau and E. M. Lifshitz, \*Mechanics\*.
+2\. L. D. Landau and E. M. Lifshitz, *Mechanics*.
 
-3\. S. H. Strogatz, \*Nonlinear Dynamics and Chaos\*.
+3\. S. H. Strogatz, *Nonlinear Dynamics and Chaos*.
 
-4\. SciPy documentation — `scipy.integrate.solve\_ivp`.
-
-
-
-\---
+4\. SciPy documentation : `scipy.integrate.solve\_ivp`.
 
 
 
-\## License
+
+
+<br>
+
+## License
 
 
 
