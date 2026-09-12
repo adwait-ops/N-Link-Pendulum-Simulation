@@ -389,7 +389,7 @@ HTML_TEMPLATE = r"""
 </head>
 <body>
 
-    <div class="header-title">N-Link Pendulum Simulation Workbench</div>
+    <div class="header-title">N-Link Pendulum Simulation</div>
 
     <div class="main-layout">
         <!-- Left Panel: Simulation Canvas & Controls -->
@@ -414,11 +414,11 @@ HTML_TEMPLATE = r"""
                     <input type="number" id="linkCount" value="12" min="1" max="20">
                 </div>
                 <div class="field-group">
-                    <label>Initial Pose:</label>
+                    <label>Initial Configuration:</label>
                     <select id="preset">
                         <option value="horizontal">Horizontal Drop</option>
-                        <option value="inverted">Inverted Instability</option>
-                        <option value="chaos">Random Chaos</option>
+                        <option value="inverted">Inverted Drop</option>
+                        <option value="chaos">Random Drop</option>
                     </select>
                 </div>
                 <div class="field-group">
@@ -457,7 +457,7 @@ HTML_TEMPLATE = r"""
         <!-- Right Panel: Dynamic Graphs & Explanations -->
         <div class="panel">
             <div style="display: flex; justify-content: space-between; align-items: center;">
-                <span style="font-weight: 600; color: #f4f4f5; font-size: 0.95rem;">System Graphs</span>
+                <span style="font-weight: 600; color: #f4f4f5; font-size: 0.95rem;">System</span>
                 <div style="display: flex; gap: 4px;">
                     <button class="btn-sm" onclick="setChartWindow(3)">3s</button>
                     <button class="btn-sm" onclick="setChartWindow(6)">6s</button>
@@ -475,7 +475,7 @@ HTML_TEMPLATE = r"""
             </div>
 
             <details>
-                <summary>Angle Graph Details & Telemetry Interpretation</summary>
+                <summary>Angle Graph Details</summary>
                 <div class="explanation-body">
                     <h4>Coordinate Reference Frame</h4>
                     <p>The graph plots the absolute spatial inclination angle $\theta_k(t)$ of each link $k \in \{1, \dots, N\}$ in radians, relative to the downward vertical gravitational vector ($0\text{ rad} = 6\text{ o'clock}$).</p>
@@ -499,7 +499,7 @@ HTML_TEMPLATE = r"""
             </div>
 
             <details>
-                <summary>Energy Graph Details & Thermodynamic Conservation</summary>
+                <summary>Energy Graph Details</summary>
                 <div class="explanation-body">
                     <h4>Energy Partition Breakdown</h4>
                     <ul style="margin-left: 18px; margin-top: 6px;">
@@ -518,9 +518,9 @@ HTML_TEMPLATE = r"""
     <!-- Bottom Section: Full Mathematical Physics Theory -->
     <div class="bottom-section">
         <details>
-            <summary>Mathematical Mechanics & Non-Linear Dynamics Theory</summary>
+            <summary>Mathematics & Non-Linear Dynamics Theory</summary>
             <div class="explanation-body theory-content">
-                <h3>1. Generalized Kinematics & Coordinate Representation</h3>
+                <h3>1. Generalized Kinematics</h3>
                 <p>An $N$-link planar pendulum constrained to a 2D vertical plane has $N$ degrees of freedom completely described by the angular vector $\boldsymbol{\theta}(t) = [\theta_1(t), \theta_2(t), \dots, \theta_N(t)]^T$, where $\theta_k$ measures the inclination of link $k$ relative to the downward vertical axis. Position vectors $\mathbf{r}_i = (x_i, y_i)$ of each bob $i \in \{1, \dots, N\}$ are given recursively from the fixed origin $(0,0)$:</p>
                 <div class="math-block">
                     $$x_i(\boldsymbol{\theta}) = \sum_{k=1}^i L_k \sin\theta_k, \quad y_i(\boldsymbol{\theta}) = -\sum_{k=1}^i L_k \cos\theta_k$$
@@ -688,7 +688,7 @@ HTML_TEMPLATE = r"""
                 console.error("Simulation error:", e);
                 alert("Failed to compute simulation. Check terminal for server logs.");
             } finally {
-                runBtn.innerText = 'Re-run Simulation';
+                runBtn.innerText = 'Simulate';
                 runBtn.disabled = false;
             }
         }
